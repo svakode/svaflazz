@@ -21,7 +21,7 @@ You must publish the config file with:
 php artisan vendor:publish --provider="Svakode\Svaflazz\SvaflazzServiceProvider"
 ```
 
-This is the contents of the config file that will be published at `config/stripe-webhooks.php`:
+This is the contents of the config file that will be published at `config/svaflazz.php`:
 
 ```php
 return [
