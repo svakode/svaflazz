@@ -1,0 +1,51 @@
+{
+    "name": "svakode/svaflazz",
+    "description": "Laravel Digiflazz Client",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Hansen",
+            "email": "hansenedrick@gmail.com"
+        }
+    ],
+    "keywords": [
+        "svakode",
+        "digiflazz",
+        "svaflazz",
+        "laravel-digiflazz"
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.3",
+        "phpunit/phpunit": "^8.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Svakode\\Svaflazz\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Svakode\\Svaflazz\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Svakode\\Svaflazz\\SvaflazzServiceProvider"
+            ],
+            "aliases": {
+                "Svaflazz": "Svakode\\Svaflazz\\Svaflazz"
+            }
+        }
+    }
+}
