@@ -73,6 +73,11 @@ This feature is for retrieving the price list in Digiflazz.
 Svaflazz::priceList();
 ```
 
+Alternatively, you can also pass your `buyer_sku_code` as an optional parameter to get the price for that code.
+```
+Svaflazz::priceList($buyer_sku_code);
+```
+
 #### Topup
 
 This feature is for doing a prepaid transaction in Digiflazz. you need to provide us

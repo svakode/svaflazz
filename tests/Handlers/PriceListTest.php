@@ -9,12 +9,13 @@ use Svakode\Svaflazz\SvaflazzWrapper;
 class PriceListTest extends TestCase
 {
     private $svaflazz, $svaflazzClient;
+    private $keyword;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $keyword = 'pricelist';
+        $this->keyword = 'pricelist';
 
         $this->svaflazzClient = Mockery::mock(SvaflazzClient::class);
         $this->svaflazzClient->shouldReceive('setUrl')
@@ -25,7 +26,7 @@ class PriceListTest extends TestCase
             ->withArgs([
                 [
                     'cmd' => 'prepaid',
-                    'sign' => $this->sign($keyword)
+                    'sign' => $this->sign($this->keyword)
                 ]
             ]);
 
@@ -43,6 +44,32 @@ class PriceListTest extends TestCase
         });;
 
         $response = $this->svaflazz->priceList();
+
+        $this->assertEquals(true, $response->success);
+    }
+
+    public function testPriceListWithCodeShouldReturnSuccess()
+    {
+        $code = 'xld25';
+
+        $this->svaflazzClient->shouldReceive('setBody')
+            ->withArgs([
+                [
+                    'cmd' => 'prepaid',
+                    'code' => $code,
+                    'sign' => $this->sign($this->keyword)
+                ]
+            ]);
+
+        $this->svaflazzClient->shouldReceive('run')->andReturnUsing(function()
+        {
+            $mockThreadResult = new \StdClass;
+            $mockThreadResult->success = true;
+
+            return $mockThreadResult;
+        });;
+
+        $response = $this->svaflazz->priceList($code);
 
         $this->assertEquals(true, $response->success);
     }

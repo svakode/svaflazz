@@ -33,11 +33,12 @@ class SvaflazzWrapper
     }
 
     /**
+     * @param string|null $buyerSkuCode
      * @return mixed
      */
-    public function priceList()
+    public function priceList(string $buyerSkuCode = '')
     {
-        return (new PriceList($this->client))->perform();
+        return (new PriceList($this->client, $buyerSkuCode))->perform();
     }
 
     /**

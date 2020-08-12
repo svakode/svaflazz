@@ -2,6 +2,10 @@
 
 All notable changes to `svaflazz` will be documented in this file
 
+## 1.1.1 - 2020-08-12
+
+- Add support for specific code price list
+
 ## 1.1.0 - 2020-08-12
 
 - Topup Artisan Command

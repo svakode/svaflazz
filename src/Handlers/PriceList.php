@@ -10,15 +10,23 @@ class PriceList extends Base
 
     /**
      * PriceList constructor.
+     * @param string $buyerSkuCode
      * @param SvaflazzClient $client
      */
-    public function __construct(SvaflazzClient $client)
+    public function __construct(SvaflazzClient $client, string $buyerSkuCode)
     {
         parent::__construct($client);
+
+        $body = [
+            'cmd' => 'prepaid',
+            'sign' => $this->sign($this->keyword)
+        ];
+
+        if ($buyerSkuCode) {
+            $body['code'] = $buyerSkuCode;
+        }
+
         $this->client->setUrl('/price-list')
-            ->setBody([
-                'cmd' => 'prepaid',
-                'sign' => $this->sign($this->keyword)
-            ]);
+            ->setBody($body);
     }
 }
