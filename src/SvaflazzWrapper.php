@@ -43,65 +43,65 @@ class SvaflazzWrapper
     /**
      * @param int $amount
      * @param string $bank
-     * @param string $owner_name
+     * @param string $ownerName
      * @return mixed
      */
-    public function deposit(int $amount, string $bank, string $owner_name)
+    public function deposit(int $amount, string $bank, string $ownerName)
     {
-        return (new Deposit($amount, $bank, $owner_name, $this->client))->perform();
+        return (new Deposit($this->client, $amount, $bank, $ownerName))->perform();
     }
 
     /**
-     * @param string $buyer_sku_code
-     * @param string $customer_no
-     * @param string $ref_id
+     * @param string $buyerSkuCode
+     * @param string $customerNo
+     * @param string $refId
      * @param string|null $msg
      * @return mixed
      */
-    public function topup(string $buyer_sku_code, string $customer_no, string $ref_id, string $msg = '')
+    public function topup(string $buyerSkuCode, string $customerNo, string $refId, string $msg = '')
     {
-        return (new Topup($buyer_sku_code, $customer_no, $ref_id, $msg, $this->client))->perform();
+        return (new Topup($this->client, $buyerSkuCode, $customerNo, $refId, $msg))->perform();
     }
 
     /**
-     * @param string $buyer_sku_code
-     * @param string $customer_no
-     * @param string $ref_id
+     * @param string $buyerSkuCode
+     * @param string $customerNo
+     * @param string $refId
      * @return mixed
      */
-    public function checkBill(string $buyer_sku_code, string $customer_no, string $ref_id)
+    public function checkBill(string $buyerSkuCode, string $customerNo, string $refId)
     {
-        return (new CheckBill($buyer_sku_code, $customer_no, $ref_id, $this->client))->perform();
+        return (new CheckBill($this->client, $buyerSkuCode, $customerNo, $refId))->perform();
     }
 
     /**
-     * @param string $buyer_sku_code
-     * @param string $customer_no
-     * @param string $ref_id
+     * @param string $buyerSkuCode
+     * @param string $customerNo
+     * @param string $refId
      * @return mixed
      */
-    public function payBill(string $buyer_sku_code, string $customer_no, string $ref_id)
+    public function payBill(string $buyerSkuCode, string $customerNo, string $refId)
     {
-        return (new PayBill($buyer_sku_code, $customer_no, $ref_id, $this->client))->perform();
+        return (new PayBill($this->client, $buyerSkuCode, $customerNo, $refId))->perform();
     }
 
     /**
-     * @param string $buyer_sku_code
-     * @param string $customer_no
-     * @param string $ref_id
+     * @param string $buyerSkuCode
+     * @param string $customerNo
+     * @param string $refId
      * @return mixed
      */
-    public function checkStatusBill(string $buyer_sku_code, string $customer_no, string $ref_id)
+    public function checkStatusBill(string $buyerSkuCode, string $customerNo, string $refId)
     {
-        return (new CheckStatusBill($buyer_sku_code, $customer_no, $ref_id, $this->client))->perform();
+        return (new CheckStatusBill($this->client, $buyerSkuCode, $customerNo, $refId))->perform();
     }
 
     /**
-     * @param string $customer_no
+     * @param string $customerNo
      * @return mixed
      */
-    public function inquiryPLN(string $customer_no)
+    public function inquiryPLN(string $customerNo)
     {
-        return (new InquiryPLN($customer_no, $this->client))->perform();
+        return (new InquiryPLN($this->client, $customerNo))->perform();
     }
 }

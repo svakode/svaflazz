@@ -3,20 +3,19 @@
 namespace Svakode\Svaflazz\Tests;
 
 use Mockery;
-use Svakode\Svaflazz\Svaflazz;
 use Svakode\Svaflazz\SvaflazzClient;
 use Svakode\Svaflazz\SvaflazzWrapper;
 
 class InquiryPLNTest extends TestCase
 {
     private $svaflazz, $svaflazzClient;
-    private $customer_no;
+    private $customerNo;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->customer_no = 'customer-no';
+        $this->customerNo = 'customer-no';
 
         $this->svaflazzClient = Mockery::mock(SvaflazzClient::class);
         $this->svaflazzClient->shouldReceive('setUrl')
@@ -27,16 +26,11 @@ class InquiryPLNTest extends TestCase
             ->withArgs([
                 [
                     'commands' => 'pln-subscribe',
-                    'customer_no' => $this->customer_no
+                    'customer_no' => $this->customerNo
                 ]
             ]);
 
         $this->svaflazz = new SvaflazzWrapper($this->svaflazzClient);
-    }
-
-    public function tearDown(): void
-    {
-        Mockery::close();
     }
 
     public function testInquiryPLNShouldReturnSuccess()
@@ -49,7 +43,7 @@ class InquiryPLNTest extends TestCase
             return $mockThreadResult;
         });;
 
-        $response = $this->svaflazz->inquiryPLN($this->customer_no);
+        $response = $this->svaflazz->inquiryPLN($this->customerNo);
 
         $this->assertEquals(true, $response->success);
     }

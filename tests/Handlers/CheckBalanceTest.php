@@ -3,7 +3,6 @@
 namespace Svakode\Svaflazz\Tests;
 
 use Mockery;
-use Svakode\Svaflazz\Svaflazz;
 use Svakode\Svaflazz\SvaflazzClient;
 use Svakode\Svaflazz\SvaflazzWrapper;
 
@@ -28,11 +27,6 @@ class CheckBalanceTest extends TestCase
             ]);
 
         $this->svaflazz = new SvaflazzWrapper($this->svaflazzClient);
-    }
-
-    public function tearDown(): void
-    {
-        Mockery::close();
     }
 
     public function testCheckBalanceShouldReturnSuccess()

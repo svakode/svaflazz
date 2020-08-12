@@ -8,21 +8,21 @@ class Topup extends Base
 {
     /**
      * CheckBalance constructor.
-     * @param string $buyer_sku_code
-     * @param string $customer_no
-     * @param string $ref_id
+     * @param string $buyerSkuCode
+     * @param string $customerNo
+     * @param string $refId
      * @param string $msg
      * @param SvaflazzClient $client
      */
-    public function __construct(string $buyer_sku_code, string $customer_no, string $ref_id, string $msg, SvaflazzClient $client)
+    public function __construct(SvaflazzClient $client, string $buyerSkuCode, string $customerNo, string $refId, string $msg)
     {
         parent::__construct($client);
 
         $body = [
-            'buyer_sku_code' => $buyer_sku_code,
-            'customer_no' => $customer_no,
-            'ref_id' => $ref_id,
-            'sign' => $this->sign($ref_id)
+            'buyer_sku_code' => $buyerSkuCode,
+            'customer_no' => $customerNo,
+            'ref_id' => $refId,
+            'sign' => $this->sign($refId)
         ];
 
         if ($msg) {

@@ -8,16 +8,16 @@ class InquiryPLN extends Base
 {
     /**
      * CheckBalance constructor.
-     * @param string $customer_no
+     * @param string $customerNo
      * @param SvaflazzClient $client
      */
-    public function __construct(string $customer_no, SvaflazzClient $client)
+    public function __construct(SvaflazzClient $client, string $customerNo)
     {
         parent::__construct($client);
         $this->client->setUrl('/transaction')
             ->setBody([
                 'commands' => 'pln-subscribe',
-                'customer_no' => $customer_no
+                'customer_no' => $customerNo
             ]);
     }
 }

@@ -3,22 +3,21 @@
 namespace Svakode\Svaflazz\Tests;
 
 use Mockery;
-use Svakode\Svaflazz\Svaflazz;
 use Svakode\Svaflazz\SvaflazzClient;
 use Svakode\Svaflazz\SvaflazzWrapper;
 
 class PayBillTest extends TestCase
 {
     private $svaflazz, $svaflazzClient;
-    private $buyer_sku_code, $customer_no, $ref_id;
+    private $buyerSkuCode, $customerNo, $refId;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->buyer_sku_code = 'pln';
-        $this->customer_no = '08211234567';
-        $this->ref_id = 'ref-id';
+        $this->buyerSkuCode = 'pln';
+        $this->customerNo = '08211234567';
+        $this->refId = 'ref-id';
 
         $this->svaflazzClient = Mockery::mock(SvaflazzClient::class);
         $this->svaflazzClient->shouldReceive('setUrl')
@@ -29,19 +28,14 @@ class PayBillTest extends TestCase
             ->withArgs([
                 [
                     'commands' => 'pay-pasca',
-                    'buyer_sku_code' => $this->buyer_sku_code,
-                    'customer_no' => $this->customer_no,
-                    'ref_id' => $this->ref_id,
-                    'sign' => $this->sign($this->ref_id)
+                    'buyer_sku_code' => $this->buyerSkuCode,
+                    'customer_no' => $this->customerNo,
+                    'ref_id' => $this->refId,
+                    'sign' => $this->sign($this->refId)
                 ]
             ]);
 
         $this->svaflazz = new SvaflazzWrapper($this->svaflazzClient);
-    }
-
-    public function tearDown(): void
-    {
-        Mockery::close();
     }
 
     public function testPayBillShouldReturnSuccess()
@@ -54,7 +48,7 @@ class PayBillTest extends TestCase
             return $mockThreadResult;
         });;
 
-        $response = $this->svaflazz->payBill($this->buyer_sku_code, $this->customer_no, $this->ref_id);
+        $response = $this->svaflazz->payBill($this->buyerSkuCode, $this->customerNo, $this->refId);
 
         $this->assertEquals(true, $response->success);
     }

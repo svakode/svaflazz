@@ -46,8 +46,12 @@ class SvaflazzClient
             $response = $this->client->post($this->url(), $this->options());
         } catch (RequestException $ex) {
             $response = $ex->getResponse();
-            $data = json_decode($response->getBody())->data;
-            throw SvaflazzException::requestFailed($data->rc, $data->message, $ex->getCode());
+            $body = json_decode($response->getBody());
+            if (isset($body->data)) {
+                throw SvaflazzException::requestFailed($body->data->rc, $body->data->message, $ex->getCode());
+            } else {
+                throw SvaflazzException::requestFailed('-', $ex->getMessage(), $ex->getCode());
+            }
         }
 
         return json_decode($response->getBody());

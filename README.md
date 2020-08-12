@@ -142,6 +142,10 @@ This feature is for inquiring PLN bill in Digiflazz. you need to provide us
 Svaflazz::inquiryPLN($customer_no);
 ```
 
+## Exception Handling
+In case of `Request Exception` which can be happened due to various reason we will throw `SvaflazzException` which will 
+accommodate the `message` and `rc` given by Digiflazz. 
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information about what has changed recently.

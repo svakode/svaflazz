@@ -2,6 +2,7 @@
 
 namespace Svakode\Svaflazz\Tests;
 
+use Mockery;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends OrchestraTestCase
@@ -9,6 +10,11 @@ abstract class TestCase extends OrchestraTestCase
     public function setUp(): void
     {
         parent::setUp();
+    }
+
+    public function tearDown(): void
+    {
+        Mockery::close();
     }
 
     /**

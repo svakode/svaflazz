@@ -3,14 +3,13 @@
 namespace Svakode\Svaflazz\Tests;
 
 use Mockery;
-use Svakode\Svaflazz\Svaflazz;
 use Svakode\Svaflazz\SvaflazzClient;
 use Svakode\Svaflazz\SvaflazzWrapper;
 
 class DepositTest extends TestCase
 {
     private $svaflazz, $svaflazzClient;
-    private $amount, $bank, $owner_name, $keyword;
+    private $amount, $bank, $ownerName, $keyword;
 
     public function setUp(): void
     {
@@ -18,7 +17,7 @@ class DepositTest extends TestCase
 
         $this->amount = 10000;
         $this->bank = 'Bank Name';
-        $this->owner_name = 'John Doe';
+        $this->ownerName = 'John Doe';
         $this->keyword = 'deposit';
 
         $this->svaflazzClient = Mockery::mock(SvaflazzClient::class);
@@ -31,17 +30,12 @@ class DepositTest extends TestCase
                 [
                     'amount' => $this->amount,
                     'Bank' => $this->bank,
-                    'owner_name' => $this->owner_name,
+                    'owner_name' => $this->ownerName,
                     'sign' => $this->sign($this->keyword)
                 ]
             ]);
 
         $this->svaflazz = new SvaflazzWrapper($this->svaflazzClient);
-    }
-
-    public function tearDown(): void
-    {
-        Mockery::close();
     }
 
     public function testDepositShouldReturnSuccess()
@@ -54,7 +48,7 @@ class DepositTest extends TestCase
             return $mockThreadResult;
         });;
 
-        $response = $this->svaflazz->deposit($this->amount, $this->bank, $this->owner_name);
+        $response = $this->svaflazz->deposit($this->amount, $this->bank, $this->ownerName);
 
         $this->assertEquals(true, $response->success);
     }

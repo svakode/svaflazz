@@ -12,17 +12,17 @@ class Deposit extends Base
      * CheckBalance constructor.
      * @param int $amount
      * @param string $bank
-     * @param string $owner_name
+     * @param string $ownerName
      * @param SvaflazzClient $client
      */
-    public function __construct(int $amount, string $bank, string $owner_name, SvaflazzClient $client)
+    public function __construct(SvaflazzClient $client, int $amount, string $bank, string $ownerName)
     {
         parent::__construct($client);
         $this->client->setUrl('/deposit')
             ->setBody([
                 'amount' => $amount,
                 'Bank' => $bank,
-                'owner_name' => $owner_name,
+                'owner_name' => $ownerName,
                 'sign' => $this->sign($this->keyword)
             ]);
     }

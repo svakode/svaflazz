@@ -3,12 +3,9 @@
 namespace Svakode\Svaflazz\Tests;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
-use Illuminate\Support\Facades\Cache;
-use Mockery;
 use Svakode\Svaflazz\Exceptions\SvaflazzException;
 use Svakode\Svaflazz\SvaflazzClient;
 
@@ -28,11 +25,6 @@ class SvaflazzClientTest extends TestCase
         $this->svaflazzClient = new SvaflazzClient($client);
         $this->svaflazzClient->setUrl('/test')
             ->setBody(['cmd' => 'test']);
-    }
-
-    public function tearDown(): void
-    {
-        Mockery::close();
     }
 
     public function testSvaflazzClientRunShouldReturnSuccess()
