@@ -142,6 +142,13 @@ This feature is for inquiring PLN bill in Digiflazz. you need to provide us
 Svaflazz::inquiryPLN($customer_no);
 ```
 
+## Artisan Command
+Too lazy to make a system? We got you covered. We provide Artisan Command for you to do a topup using 
+```
+php artisan svaflazz:topup
+```
+You will be prompted to input `buyer_sku_code`, `customer_no`, and `ref_id`.
+
 ## Exception Handling
 In case of `Request Exception` which can be happened due to various reason we will throw `SvaflazzException` which will 
 accommodate the `message` and `rc` given by Digiflazz. 

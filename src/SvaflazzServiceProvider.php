@@ -4,6 +4,7 @@ namespace Svakode\Svaflazz;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
+use Svakode\Svaflazz\Commands\TopupCommand;
 
 class SvaflazzServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,12 @@ class SvaflazzServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/svaflazz.php' => config_path('svaflazz.php'),
         ]);
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                TopupCommand::class,
+            ]);
+        }
     }
 
     /**
