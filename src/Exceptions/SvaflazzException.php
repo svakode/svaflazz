@@ -19,6 +19,6 @@ class SvaflazzException extends Exception
 
     public function render($request)
     {
-        return response(['error' => $this->getMessage()], $this->getCode());
+        return response(['error' => json_decode($this->getMessage())], $this->getCode());
     }
 }
