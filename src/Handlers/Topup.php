@@ -22,7 +22,8 @@ class Topup extends Base
             'buyer_sku_code' => $buyerSkuCode,
             'customer_no' => $customerNo,
             'ref_id' => $refId,
-            'sign' => $this->sign($refId)
+            'sign' => $this->sign($refId),
+            'testing' => env("DIGIFLAZZ_TESTING",false)
         ];
 
         if ($msg) {
